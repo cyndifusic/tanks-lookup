@@ -114,7 +114,6 @@ var drawBoard = function(missionChanged) {
 	}
 
 	let leftovers = [...document.getElementsByClassName("overlapping")].concat([...document.getElementsByClassName("colorPane")]);
-	console.log(leftovers);
 	for (let i = 0; i < leftovers.length; i++) {
 		leftovers[i].remove();
 	}
@@ -212,15 +211,15 @@ var swapAspectRatio = function() {
 }
 
 var addMission = function() {
-	if (currentMission <= 100) {
+	if (currentMission < 100) {
+		console.log("hey");
 		currentMission += 1;
-		console.log(currentMission);
 		changeMission();
 	}
 }
 
 var subtractMission = function() {
-	if (currentMission >= 1) {
+	if (currentMission > 1) {
 		currentMission -= 1;
 		changeMission();
 	}
