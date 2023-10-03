@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tanks Lookup</title>
+    <style>
+        .square {
+			border: solid;
+			border-color: black;
+			border-width: 1px;	
+			padding: 0px;
+			width: 32px;
+			height: 32px;
+		}
+
+		body {
+			font-family: "Times New Roman";
+		}
+
+		div {
+			position: relative;
+		}
+
+        img {
+			margin-bottom: -4px;
+		}
+
+		span {
+			position: absolute;
+			top: 7px;
+			left: 12px;
+		}
+
+		.overlapping {
+			position: absolute;
+			top: 0px;
+			left: 0px;
+		}
+
+		.enemy {
+			left: 14px;
+		}
+
+		h2 {
+			user-select: none;
+		}
+
+		.layoutSelect, .colorsBox {
+			margin-right: 10px;
+			margin-bottom: 10px;
+			float: left;
+			border: solid;
+			border-color: black;
+			border-width: 2px;
+			width: 64px;
+			height: 64px;
+			text-align: center;
+		}
+
+		.colorPane {
+			width: 64px;
+			height: 16px;
+		}
+
+		#outerShell, #colors {
+			clear: both;
+		}
+
+		#theRest, table {
+			float: left;
+		}
+
+		table {
+			padding-right: 30px;
+			padding-bottom: 30px;
+		}
+
+		#colors {
+			padding-top: 20px;
+		}
+
+		.layoutSelect:not(.selected):hover {
+			background-color: #c4ffe1;
+		}
+
+		.selected {
+			background-color: #03fc7b;
+		}
+    </style>
+</head>
+<body>
+	<div>
+		<table cellspacing="0px" id="outerTable"></table><br>
+
+		<div id="theRest">
+			<br><button id="swap">Swap Aspect Ratio</button> <button id="previousMission">Previous Mission</button> <button id="nextMission">Next Mission</button>
+			<br><p>Jump to mission: </p><input id="typeMission"> <button id="jump">Go</button>
+			<br><h1 id="info"></h1>
+		</div>
+	</div>
+
+	
+	<div id="outerShell">
+    	
+	
+	</div>
+
+	<div id="colors">
+		
+	</div>	
+
+	
+
+    <script src="script.js" type="module"></script>
+</body>
+</html>
