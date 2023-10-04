@@ -212,7 +212,6 @@ var swapAspectRatio = function() {
 
 var addMission = function() {
 	if (currentMission < 100) {
-		console.log("hey");
 		currentMission += 1;
 		changeMission();
 	}
