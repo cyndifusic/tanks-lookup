@@ -11,8 +11,9 @@ var jumpButton = document.getElementById("jump");
 var missionInput = document.getElementById("typeMission");
 var info = document.getElementById("info");
 var outerShell = document.getElementById("outerShell");
+var permutations = document.getElementById("permutations");
 
-var currentMission = 1;
+var currentMission = 44;
 var aspectRatio = -1;
 var minLayout = param[422 + (22 * (currentMission - 1)) + 17];
 var maxLayout = param[422 + (22 * (currentMission - 1)) + 18];
@@ -41,6 +42,9 @@ var drawBoard = function(missionChanged) {
 
 	decArray = [];
 	parsedArray = [];
+	var colorCounts = [];
+	var permutationCount = 1;
+
 	if (table != null) {
 		table.remove();
 	}
@@ -154,6 +158,7 @@ var drawBoard = function(missionChanged) {
 
 			let min = parseInt(param[i].toString().charAt(0));
 			let max = parseInt(param[i].toString().charAt(1));
+			colorCounts.push(max - min + 1);
 			for (let k = min; k <= max; k++) {
 				let newColorPane = document.createElement("div");
 				newColorPane.className = "colorPane";
@@ -194,6 +199,12 @@ var drawBoard = function(missionChanged) {
 	}
 
 	info.innerHTML = "Aspect Ratio: " + ["4:3", null, "16:9"][aspectRatio+1] + "<br>Mission #" + currentMission;
+	
+	for (let i = 0; i < colorCounts.length; i++) {
+		permutationCount *= colorCounts[i];
+	}
+	permutationCount *= maxLayout - minLayout + 1;
+	permutations.innerHTML = "Possible permutations: <b>" + permutationCount + "</b>";
 }
 
 var changeMission = function() {
