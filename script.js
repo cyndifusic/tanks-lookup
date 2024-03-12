@@ -13,7 +13,7 @@ var info = document.getElementById("info");
 var outerShell = document.getElementById("outerShell");
 var permutations = document.getElementById("permutations");
 
-var currentMission = 44;
+var currentMission = 1;
 var aspectRatio = -1;
 var minLayout = param[422 + (22 * (currentMission - 1)) + 17];
 var maxLayout = param[422 + (22 * (currentMission - 1)) + 18];
