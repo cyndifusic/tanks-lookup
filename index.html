@@ -93,6 +93,35 @@
 		#permutations {
 			font-weight: normal;
 		}
+
+		#contentLookup {
+			width: 280px;
+			height: 230px;
+			border-style: solid;
+			border-width: 1px;
+			padding-left: 10px;
+		}
+
+		#contentLookup > h2 {
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+
+		#clContainer > div {
+			display: inline-block;
+			vertical-align: top;
+		}
+
+		#clRightContainer {
+			padding-left: 10px;
+		}
+
+		.clSquare {
+			width: 12px;
+			height: 12px;
+			border-style: solid;
+			border-width: 1px;
+		}
     </style>
 </head>
 <body>
@@ -104,7 +133,34 @@
 			<br><p>Jump to mission: </p><input id="typeMission"> <button id="jump">Go</button>
 			<br><h1 id="info"></h1>
 			<br><h2 id="permutations"></h2>
-			<i><a href="about.html" target="_blank">How does this work?</a></i>
+			<br><div id="contentLookup">
+				<h2>Content Lookup</h2>
+
+				<div id="clContainer">
+					<div id="clLeftContainer">
+						<select name="lookupOptions" id="lookupOptions">
+							<option value="1">Brown</option>
+							<option value="2">Ash</option>
+							<option value="3">Marine</option>
+							<option value="4">Pink</option>
+							<option value="5">Yellow</option>
+							<option value="6">Violet</option>
+							<option value="7">Green</option>
+							<option value="8">White</option>
+							<option value="9">Black</option>
+						</select>
+
+						<br><br><button id="clSearch">Search</button>
+					</div>
+
+					<div id="clRightContainer">
+						<table cellspacing="0px" id="clTable">
+
+						</table>
+					</div>
+				</div>
+			</div>
+			<br><i><a href="about.html" target="_blank">How does this work?</a></i>
 		</div>
 	</div>
 

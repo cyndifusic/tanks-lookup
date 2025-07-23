@@ -17,10 +17,14 @@
     <i><p id="lol">an interactive website that generates all known information about any mission in Wii Play Tanks!</p></i>
     <p><b>The Grid</b> - this displays the currently selected level layout. Every layout has 8 enemy tank spawn locations. If a spawn location is not used for the selected mission, there will be a red X over it. If a spawn location has a specific tank color associated with it for the selected mission, the cell will be highlighted that color. If a spawn location has a randomized tank color, there will be a blue question mark over it. Other than that, things should look pretty familiar apart from the numbers overlaid on top of blocks, which represent how high the blocks are stacked (can go as high as 7).</p>
 
-    <p><b>Mission Selector</b> - this is pretty straightforward, it lets you select a mission. Click "Previous Mission" to go back one and "Next Mission" to go forward one. If you want to jump to a specific mission, type it in the box and press "Go". If you wish to view the level layouts for a different aspect ratio, click "Swap Aspect Ratio".</p>
+    <p><b>Mission Selector</b> - this is pretty straightforward, it lets you select a mission. Click "Previous Mission" to go back one and "Next Mission" to go forward one. If you want to jump to a specific mission, type it in the box and press "Go". If you wish to view the level layouts for a different aspect ratio, click "Swap Aspect Ratio". Just below, "Possible permutations" tells you how many different ways the currently selected level can be randomized.</p>
+
+    <p><b>Content Lookup</b> - this allows you to look up levels by the tanks that they contain. The cells in the 10x10 grid correspond to the 100 missions, in order from left to right and top to bottom. If a cell is highlighted gray, that mission does not contain the desired tank color at all. If a cell is highlighted green, that mission is guaranteed to contain the desired tank color. If a cell is highlighted yellow, that mission <i>can</i> contain the desired tank color, but it is only possible through randomization. You can click any active cell to jump to the corresponding mission.</p>
 
     <p><b>Layout Selector</b> - there are 30 unique level layouts in Wii Play Tanks!. If the selected mission has no layout randomization, the layout selector will simply tell you the internal layout ID that the mission uses. If the selected mission has layout randomization, the layout selector will display the range of possible layout IDs, and you can click on any one of them to view that layout. The main feature of this is being able to see how the tank colors for a randomized mission apply to each of its possible layouts, since the spawn locations are built into the layout data.</b></p>
 
     <p><b>Color Info</b> - this pane at the very bottom once again shows the tank colors for each spawn location. The unique thing is that it will show the ranges of possible tank colors for each randomized slot. These ranges can contain as few as 2 colors and as many as 6.</p>
+
+
 </body>
 </html>

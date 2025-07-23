@@ -8,6 +8,7 @@ var swapButton = document.getElementById("swap");
 var nextMissionButton = document.getElementById("nextMission");
 var previousMissionButton = document.getElementById("previousMission");
 var jumpButton = document.getElementById("jump");
+var searchButton = document.getElementById("clSearch");
 var missionInput = document.getElementById("typeMission");
 var info = document.getElementById("info");
 var outerShell = document.getElementById("outerShell");
@@ -38,8 +39,48 @@ for (let i = 0; i < 8; i++) {
 	document.getElementById("colors").appendChild(newBox);
 }
 
-var drawBoard = function(missionChanged) {
+var createTable = function(width, height, needsImages, cellClassName) {
+	var out = document.createElement("tbody");
 
+	for (let i = 0; i < height; i++) {
+		var newRow = document.createElement("TR");
+		for (let n = 0; n < width; n++) {
+			var newBox = document.createElement("TD");
+			newBox.className = cellClassName;
+			var newDiv = document.createElement("div");		
+
+			if (needsImages) {
+				var image = document.createElement("img");
+				image.id = (n + (i * width)).toString();
+				newDiv.appendChild(image);
+			} else {
+				newBox.id = (n + (i * width)).toString() + "c";
+			}
+
+			newBox.appendChild(newDiv);
+			newRow.appendChild(newBox);
+		}
+
+		out.appendChild(newRow);
+	}
+
+	return out;
+}
+
+var clTable = function() {
+	document.getElementById("clTable").appendChild(createTable(10, 10, false, "clSquare"));
+
+	var clCells = [...document.getElementsByClassName("clSquare")];
+
+	for (let i = 0; i < clCells.length; i++) {
+		clCells[i].addEventListener("mouseover", clColorHover);
+		clCells[i].addEventListener("mouseout", clColorOut);
+		clCells[i].addEventListener("click", clColorClick);
+	}
+}
+
+var drawBoard = function(missionChanged) {
+	
 	decArray = [];
 	parsedArray = [];
 	var colorCounts = [];
@@ -70,24 +111,8 @@ var drawBoard = function(missionChanged) {
 		parsedArray.push(temp);
 	}
 
-	width = parsedArray[0][1];
-	height = parsedArray[1][1];
+	table = createTable(parsedArray[0][1], parsedArray[1][1], true, "square");
 
-	table = document.createElement("tbody");
-	for (let i = 0; i < height; i++) {
-		var newRow = document.createElement("TR");
-		for (let n = 0; n < width; n++) {
-			var newBox = document.createElement("TD");
-			newBox.className = "square";
-			var newDiv = document.createElement("div");
-			var image = document.createElement("img");
-			image.id = (n + (i * width)).toString();
-			newDiv.appendChild(image);
-			newBox.appendChild(newDiv);
-			newRow.appendChild(newBox);
-		}
-		table.appendChild(newRow);
-	}
 	document.getElementById("outerTable").appendChild(table);
 
 	for (let i = 0; i < parsedArray.length; i++) {
@@ -207,6 +232,35 @@ var drawBoard = function(missionChanged) {
 	permutations.innerHTML = "Possible permutations: <b>" + permutationCount + "</b>";
 }
 
+var contentLookup = function() {
+	let color = parseInt(document.getElementById("lookupOptions").value);
+
+	for (let mission = 1; mission <= 100; mission++) {
+		let match = 0;
+		let outcomes = ["#9c9c9c", "#e6c807", "#37db63"];
+
+		for (let i = 422 + (22 * (mission - 1)) + 1; i < 422 + (22 * (mission - 1)) + 9; i++) {
+			if (param[i] < 10) {
+				if (param[i] == color) {
+					match = 2;
+					break;
+				}
+			} else {
+				let min = parseInt(param[i].toString().charAt(0));
+				let max = parseInt(param[i].toString().charAt(1));
+				
+				if (color >= min && color <= max) {
+					match = 1;
+				}
+			}
+		}
+
+		let currentCell = document.getElementById((mission - 1) + "c");
+		currentCell.style.backgroundColor = outcomes[match];
+		currentCell.className = "clSquare type" + match;
+	}
+}
+
 var changeMission = function() {
 	minLayout = param[422 + (22 * (currentMission - 1)) + 17];
 	maxLayout = param[422 + (22 * (currentMission - 1)) + 18];
@@ -236,8 +290,12 @@ var subtractMission = function() {
 }
 
 var jumpToMission = function() {
-	currentMission = parseInt(missionInput.value);
-	changeMission();
+	let allegedInput = parseInt(missionInput.value);
+
+	if (allegedInput >= 1 && allegedInput <= 100) {
+		currentMission = allegedInput;
+		changeMission();
+	}
 }
 
 var changeLayout = function(event) {
@@ -248,10 +306,47 @@ var changeLayout = function(event) {
 	drawBoard(false);
 }
 
+/* There is a 100% better way to do this and it is literally in this same program.
+I forgot the .classList property existed.
+Woe is me. */
+
+var clColorHover = function() {
+	switch(event.currentTarget.className.substring(9, 14)) {
+		case "type1":;
+			event.currentTarget.style.backgroundColor = "#f5e476";
+			break;
+
+		case "type2":
+			event.currentTarget.style.backgroundColor = "#9cf0b2";
+			break;
+	}
+}
+
+var clColorOut = function() {
+	switch(event.currentTarget.className.substring(9, 14)) {
+		case "type1":
+			event.currentTarget.style.backgroundColor = "#e6c807";
+			break;
+
+		case "type2":
+			event.currentTarget.style.backgroundColor = "#37db63";
+			break;
+	}
+}
+
+var clColorClick = function() {
+	if (event.currentTarget.className.substring(9, 14) != "type0") {
+		missionInput.value = parseInt(event.currentTarget.id.substring(0, event.currentTarget.id.length)) + 1;
+		jumpToMission();
+	}
+}
+
 swapButton.addEventListener("click", swapAspectRatio);
 previousMissionButton.addEventListener("click", subtractMission);
 nextMissionButton.addEventListener("click", addMission);
 jumpButton.addEventListener("click", jumpToMission);
+searchButton.addEventListener("click", contentLookup);
+window.addEventListener("load", clTable);
 
 drawBoard(true);
 
