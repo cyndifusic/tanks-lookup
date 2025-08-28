@@ -335,7 +335,8 @@ var clColorOut = function() {
 }
 
 var clColorClick = function() {
-	if (event.currentTarget.className.substring(9, 14) != "type0") {
+	console.log(event.currentTarget.className);
+	if (event.currentTarget.className.substring(9, 14) != "type0" && event.currentTarget.className != "clSquare") {
 		missionInput.value = parseInt(event.currentTarget.id.substring(0, event.currentTarget.id.length)) + 1;
 		jumpToMission();
 	}
